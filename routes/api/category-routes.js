@@ -48,8 +48,8 @@ router.put('/:id', async (req, res) => {
   try {
     const previousData = await Category.findByPk(req.params.id);
 
-    if (category_name === previousData.category_name) {
-      res.status(202).json({message: `Inputed name is the same as exiting name for ID: ${req.params.id}`});
+    if (!previousData) {
+      res.status(404).json({message: `No catagory with ID: ${req.params.id} exist`});
       return;
     };
 
